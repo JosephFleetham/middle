@@ -65,7 +65,7 @@ class TopNav extends Component {
                         <a className="light green item active" href="#">
                           Sign in/Sign up<br />
                             <div id='searchicon'>
-                              <a className="light green item" href="#">
+                              <a className="light green item" href="##">
                                 <i className='search icon'>
                                 </i>
                               </a>
