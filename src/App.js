@@ -61,11 +61,16 @@ class TopNav extends Component {
                     <div className="five wide column">
                         <div className="yellow item" href="#"><h1>Middle</h1></div>
                     </div>
-                    <div className="two wide column">
-                        <a className="light green item active" href="#">Log in/Log out</a>
-                    </div>
-                    <div className="one wide column">
-                      <i className='search icon'></i>
+                    <div className="three wide column">
+                        <a className="light green item active" href="#">
+                          Sign in/Sign up<br />
+                            <div id='searchicon'>
+                              <a className="light green item" href="#">
+                                <i className='search icon'>
+                                </i>
+                              </a>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
