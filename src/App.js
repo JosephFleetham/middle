@@ -72,6 +72,7 @@ class TopNav extends Component {
                             </div>
                         </a>
                     </div>
+                    <div className="one wide column"></div>
                 </div>
             </div>
         </div>
