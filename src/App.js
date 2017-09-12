@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import data from './data.js';
 
-class App extends Component {
+const App = React.createClass({
   render() {
     return (
       <div className="filler">
@@ -18,16 +19,20 @@ class App extends Component {
       </div>
     );
   }
-}
+});
 
-class CardList extends Component {
-  render() {
+const CardList = React.createClass ({
+  render () {
+    var data = {names:[ "Joseph Fleetham", "Sam Bryant", "Morris Alpert", "Julia Quam", "Mike Rendor", "Muhammed Abdul" ],
+                titles:["The Best National Parks on the West Coast", "Cats: The People of Animals?", "Why ReactJS is So Frusturating", "How the Minnesota Twins Can Win the World Series", "How to Love Yourself Like Your Cat Loves You", "Top 100 Places to Travel This Fall"]}
     return (
       <div className="ui grid">
         <div className="two wide column">
         </div>
         <div className="five wide column">
           <Card
+            name={data.names[Math.floor(Math.random()*6)]}
+            title={data.titles[Math.floor(Math.random()*6)]}
 
           />
         </div>
@@ -80,7 +85,7 @@ class CardList extends Component {
       </div>
     )
   }
-}
+});
 
 class Card extends Component {
   render() {
@@ -88,16 +93,13 @@ class Card extends Component {
       <div id="box">
         <img src="https://unsplash.it/500/200?random=144" alt="cover"></img>
         <div className="CardContent">
-          <h1>Beautiful Parks of the World</h1>
+          <h1>{this.props.title}</h1>
           <p></p>
         </div>
         <div className="Author">
           <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="author"></img>
-          <div className="name">James Nelson</div>
-          <div className="time">
-            "14"
-            " min read"
-          </div>
+          <div className="name">{this.props.name}</div>
+          <div className="time">{this.props.time}</div>
         </div>
       </div>
     )
