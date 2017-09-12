@@ -12,7 +12,7 @@ class App extends Component {
           />
         </div>
         <br />
-        <CardDashboard
+        <CardList
 
         />
       </div>
@@ -20,22 +20,87 @@ class App extends Component {
   }
 }
 
-class CardDashboard extends Component {
+class CardList extends Component {
   render() {
     return (
-      <div id='box'>
-        <div className='ui grid'>
-          <div className="eight wide column">
-            <h2>Welcome to React</h2>
-          </div>
-          <div className="eight wide column">
-            <p className="App-intro">
-              To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
+      <div className="ui grid">
+        <div className="two wide column">
+        </div>
+        <div className="five wide column">
+          <Card
+
+          />
+        </div>
+        <div className="one wide column">
+        </div>
+        <div className="five wide column">
+          <Card
+
+          />
+
+        </div>
+        <div className="two wide column">
+        </div>
+        <br />
+        <div className="two wide column">
+        </div>
+        <div className="five wide column">
+          <Card
+
+          />
+        </div>
+        <div className="one wide column">
+        </div>
+        <div className="five wide column">
+          <Card
+
+          />
+
+        </div>
+        <div className="two wide column">
+        </div>
+        <br />
+        <div className="two wide column">
+        </div>
+        <div className="five wide column">
+          <Card
+
+          />
+        </div>
+        <div className="one wide column">
+        </div>
+        <div className="five wide column">
+          <Card
+
+          />
+
+        </div>
+        <div className="two wide column">
+        </div>
+      </div>
+    )
+  }
+}
+
+class Card extends Component {
+  render() {
+    return (
+      <div id="box">
+        <img src="https://unsplash.it/500/200?random=144" alt="cover"></img>
+        <div className="CardContent">
+          <h1>Beautiful Parks of the World</h1>
+          <p></p>
+        </div>
+        <div className="Author">
+          <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="author"></img>
+          <div className="name">James Nelson</div>
+          <div className="time">
+            "14"
+            " min read"
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -82,5 +147,7 @@ class TopNav extends Component {
     );
   }
 }
+
+
 
 export default App;
