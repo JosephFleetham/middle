@@ -30,9 +30,9 @@ const CardList = React.createClass ({
             }
     };
   },
-  componentDidMount: function () {
-    this.updateState();
-  },
+  // componentDidMount: function () {
+  //   this.updateState();
+  // },
 
   updateState: function () {
     this.setState({ data: data });
