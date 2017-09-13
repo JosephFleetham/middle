@@ -22,67 +22,86 @@ const App = React.createClass({
 });
 
 const CardList = React.createClass ({
-  render () {
-    var data = {names:[ "Joseph Fleetham", "Sam Bryant", "Morris Alpert", "Julia Quam", "Mike Rendor", "Muhammed Abdul" ],
-                titles:["The Best National Parks on the West Coast", "Cats: The People of Animals?", "Why ReactJS is So Frusturating", "How the Minnesota Twins Can Win the World Series", "How to Love Yourself Like Your Cat Loves You", "Top 100 Places to Travel This Fall"]}
-    return (
-      <div className="ui grid">
-        <div className="two wide column">
-        </div>
-        <div className="five wide column">
-          <Card
-            name={data.names[Math.floor(Math.random()*6)]}
-            title={data.titles[Math.floor(Math.random()*6)]}
+  getInitialState: function () {
+    return {
+      data: {names:[ "Joseph Fleetham", "Sam Bryant", "Morris Alpert", "Julia Quam", "Mike Rendor", "Muhammed Abdul" ],
+            titles:["The Best National Parks on the West Coast", "Cats: The People of Animals?", "Why ReactJS is So Frusturating", "How the Minnesota Twins Can Win the World Series", "How to Love Yourself Like Your Cat Loves You", "Top 100 Places to Travel This Fall"],
+            photo:["https://unsplash.it/500/200/?random=1"]
+            }
+    };
+  },
+  componentDidMount: function () {
+    this.updateState();
+  },
 
-          />
-        </div>
-        <div className="one wide column">
-        </div>
-        <div className="five wide column">
-          <Card
+  updateState: function () {
+    this.setState({ data: data });
+  },
+  render: function () {
+    const data = this.state.data;
+      return (
+        <div className="ui grid">
+          <div className="two wide column">
+          </div>
+          <div className="five wide column">
+            <Card
+              name={data.names[0]}
+              title={data.titles}
+              photo={data.photo}
+            />
+          </div>
+          <div className="one wide column">
+          </div>
+          <div className="five wide column">
+            <Card
+              name={data.names}
+              title={data.titles}
+              photo={data.photo}
+            />
 
-          />
+          </div>
+          <div className="two wide column">
+          </div>
+          <br />
+          <div className="two wide column">
+          </div>
+          <div className="five wide column">
+            <Card
+              name={data.names}
+              title={data.titles}
+              photo={data.photo}
+            />
 
-        </div>
-        <div className="two wide column">
-        </div>
-        <br />
-        <div className="two wide column">
-        </div>
-        <div className="five wide column">
-          <Card
+          </div>
+          <div className="one wide column">
+          </div>
+          <div className="five wide column">
+            <Card
 
-          />
-        </div>
-        <div className="one wide column">
-        </div>
-        <div className="five wide column">
-          <Card
+            />
 
-          />
+          </div>
+          <div className="two wide column">
+          </div>
+          <br />
+          <div className="two wide column">
+          </div>
+          <div className="five wide column">
+            <Card
 
-        </div>
-        <div className="two wide column">
-        </div>
-        <br />
-        <div className="two wide column">
-        </div>
-        <div className="five wide column">
-          <Card
+            />
+          </div>
+          <div className="one wide column">
+          </div>
+          <div className="five wide column">
+            <Card
 
-          />
-        </div>
-        <div className="one wide column">
-        </div>
-        <div className="five wide column">
-          <Card
+            />
 
-          />
-
+          </div>
+          <div className="two wide column">
+          </div>
         </div>
-        <div className="two wide column">
-        </div>
-      </div>
     )
   }
 });
@@ -91,7 +110,7 @@ class Card extends Component {
   render() {
     return (
       <div id="box">
-        <img src="https://unsplash.it/500/200?random=144" alt="cover"></img>
+        <img src={this.props.photo} alt="cover"></img>
         <div className="CardContent">
           <h1>{this.props.title}</h1>
           <p></p>
