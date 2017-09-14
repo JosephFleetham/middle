@@ -1,9 +1,36 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import data from './data.js';
 
 const App = React.createClass({
+  getInitialState: function () {
+    return {
+      cards: [
+        {
+          title: 'Practice squat',
+          project: 'Gym Chores',
+          id: 1,
+          elapsed: 5456099,
+          runningSince: Date.now(),
+        },
+        {
+          title: 'Bake squash',
+          project: 'Kitchen Chores',
+          id: 2,
+          elapsed: 1273998,
+          runningSince: null,
+        },
+        {
+          title: "do shit",
+          project: "shit shit"
+        },
+        {
+          title: "more shit",
+          project: "tryign to get rid of shit"
+        }
+      ],
+    };
+  },
   render() {
     return (
       <div className="filler">
@@ -11,127 +38,70 @@ const App = React.createClass({
           <TopNav
 
           />
+
         </div>
         <br />
-        <CardList
-
-        />
+          <CardList
+            cards={this.state.cards}
+          />
       </div>
     );
   }
 });
 
-const CardList = React.createClass ({
-  getInitialState: function () {
-    return {
-      data: {names:[ "Joseph Fleetham", "Sam Bryant", "Morris Alpert", "Julia Quam", "Mike Rendor", "Muhammed Abdul" ],
-            titles:["The Best National Parks on the West Coast", "Cats: The People of Animals?", "Why ReactJS is So Frusturating", "How the Minnesota Twins Can Win the World Series", "How to Love Yourself Like Your Cat Loves You", "Top 100 Places to Travel This Fall"],
-            photo:["https://unsplash.it/500/200/?random=1"]
-            }
-    };
-  },
-  // componentDidMount: function () {
-  //   this.updateState();
-  // },
-
-  updateState: function () {
-    this.setState({ data: data });
-  },
+const CardList = React.createClass({
   render: function () {
-    const data = this.state.data;
+    // leanpub-start-insert
+    const cards = this.props.cards.map((card) => (
+      <Card
+        key={card.id}
+        id={card.id}
+        title={card.title}
+        project={card.project}
+        elapsed={card.elapsed}
+        runningSince={card.runningSince}
+      />
+    ));
+    for (var i=0; i<cards.length; i++) {
       return (
         <div className="ui grid">
           <div className="two wide column">
           </div>
           <div className="five wide column">
-            <Card
-              name={data.names[0]}
-              title={data.titles}
-              photo={data.photo}
-            />
+            {cards[i + (Math.floor(Math.random() * cards.length))]}
           </div>
           <div className="one wide column">
           </div>
           <div className="five wide column">
-            <Card
-              name={data.names}
-              title={data.titles}
-              photo={data.photo}
-            />
-
-          </div>
-          <div className="two wide column">
-          </div>
-          <br />
-          <div className="two wide column">
-          </div>
-          <div className="five wide column">
-            <Card
-              name={data.names}
-              title={data.titles}
-              photo={data.photo}
-            />
-
-          </div>
-          <div className="one wide column">
-          </div>
-          <div className="five wide column">
-            <Card
-
-            />
-
-          </div>
-          <div className="two wide column">
-          </div>
-          <br />
-          <div className="two wide column">
-          </div>
-          <div className="five wide column">
-            <Card
-
-            />
-          </div>
-          <div className="one wide column">
-          </div>
-          <div className="five wide column">
-            <Card
-
-            />
-
+            {cards[i + (Math.floor(Math.random() * cards.length))]}
           </div>
           <div className="two wide column">
           </div>
         </div>
-    )
-  }
+      );
+    };
+    // leanpub-end-insert
+  },
 });
 
-class Card extends Component {
-  render() {
+const Card = React.createClass({
+  render: function () {
     return (
       <div id="box">
-        <img src={this.props.photo} alt="cover"></img>
+        <img src={this.props.id} alt="cover"></img>
         <div className="CardContent">
           <h1>{this.props.title}</h1>
-          <p></p>
+          <p>{this.props.project}</p>
         </div>
         <div className="Author">
-          <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="author"></img>
-          <div className="name">{this.props.name}</div>
-          <div className="time">{this.props.time}</div>
+          <img src="" alt="author"></img>
+          <div className="name"></div>
+          <div className="time"></div>
         </div>
       </div>
     )
   }
-}
-
-// class Card extends Component {
-//   render() {
-//     return (
-//
-//     );
-//   }
-// }
+});
 
 class TopNav extends Component {
   render() {
@@ -168,7 +138,5 @@ class TopNav extends Component {
     );
   }
 }
-
-
 
 export default App;
