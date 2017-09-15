@@ -71,49 +71,47 @@ const CardList = React.createClass({
         project={card.project}
         photo={card.photo}
       />
-    ));
-    for (var i=0; i<cards.length; i++) {
-      return (
-        <div className="ui grid">
-          <div className="two wide column">
-          </div>
-          <div className="five wide column">
-            {cards[i + (Math.floor(Math.random() * cards.length))]}
-          </div>
-          <div className="one wide column">
-          </div>
-          <div className="five wide column">
-            {cards[i + (Math.floor(Math.random() * cards.length))]}
-          </div>
-          <div className="two wide column">
-          </div>
-          <div className="two wide column">
-          </div>
-          <div className="five wide column">
-            {cards[i + (Math.floor(Math.random() * cards.length))]}
-          </div>
-          <div className="one wide column">
-          </div>
-          <div className="five wide column">
-            {cards[i + (Math.floor(Math.random() * cards.length))]}
-          </div>
-          <div className="two wide column">
-          </div>
-          <div className="two wide column">
-          </div>
-          <div className="five wide column">
-            {cards[i + (Math.floor(Math.random() * cards.length))]}
-          </div>
-          <div className="one wide column">
-          </div>
-          <div className="five wide column">
-            {cards[i + (Math.floor(Math.random() * cards.length))]}
-          </div>
-          <div className="two wide column">
-          </div>
+    ));  
+    return (
+      <div className="ui grid">
+        <div className="two wide column">
         </div>
-      );
-    };
+        <div className="five wide column">
+          {cards[(Math.floor(Math.random() * cards.length))]}
+        </div>
+        <div className="one wide column">
+        </div>
+        <div className="five wide column">
+          {cards[(Math.floor(Math.random() * cards.length))]}
+        </div>
+        <div className="two wide column">
+        </div>
+        <div className="two wide column">
+        </div>
+        <div className="five wide column">
+          {cards[(Math.floor(Math.random() * cards.length))]}
+        </div>
+        <div className="one wide column">
+        </div>
+        <div className="five wide column">
+          {cards[(Math.floor(Math.random() * cards.length))]}
+        </div>
+        <div className="two wide column">
+        </div>
+        <div className="two wide column">
+        </div>
+        <div className="five wide column">
+          {cards[(Math.floor(Math.random() * cards.length))]}
+        </div>
+        <div className="one wide column">
+        </div>
+        <div className="five wide column">
+          {cards[(Math.floor(Math.random() * cards.length))]}
+        </div>
+        <div className="two wide column">
+        </div>
+      </div>
+    );
     // leanpub-end-insert
   },
 });
