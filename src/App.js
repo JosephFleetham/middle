@@ -7,7 +7,7 @@ const App = React.createClass({
   getInitialState: function () {
     return {
       cards: [],
-      person: []
+      persons: []
     };
   },
   componentDidMount: function () {
@@ -23,7 +23,7 @@ const App = React.createClass({
       return response.json();
     })
     .then(function(data) {
-      that.setState({ person: data.person });
+      that.setState({ persons: data.results });
     });
 
   },
@@ -42,6 +42,7 @@ const App = React.createClass({
         <br />
           <CardList
             cards={this.state.cards}
+            persons={this.state.persons}
           />
       </div>
     );
@@ -71,9 +72,14 @@ const CardList = React.createClass({
         title={card.title}
         description={card.description}
         photo={card.photo}
-        author={card.author}
         authorPhoto={card.authorPhoto}
         time={card.time}
+
+      />
+    ));
+    const persons = this.props.persons.map((persons) => (
+      <Card
+        author={persons.gender}
 
       />
     ));
@@ -83,6 +89,7 @@ const CardList = React.createClass({
         </div>
         <div className="five wide column">
           {cards[0]}
+          {persons}
         </div>
         <div className="one wide column">
         </div>
@@ -131,7 +138,7 @@ const Card = React.createClass({
           <p>{this.props.description}</p>
         </div>
         <div className="Author">
-          <img src={this.props.authorPhoto} alt="authorOhoto"></img>
+          <img src={this.props.authorPhoto} alt="authorPhoto"></img>
           <div className="author">{this.props.author}</div>
           <div className="time">{this.props.time}</div>
         </div>
