@@ -1,73 +1,49 @@
-{
- "titles": [
-   "Title1",
-   "Title2",
-   "Title3",
-   "Title4",
-   "Title5",
-   "Title6"
-  ],
-  "descriptions": [
-    "D1",
-    "D2",
-    "D3"
-  ],
-  "names": [
-    "John Smith",
-    "Matthew Patel",
-    "Sabrina Khan",
-    "Max Power",
-    "Joseph Fleetham",
-    "Min Lee"
-  ],
-  "times": [
-    "2 min 15 sec",
-    "5 min 12 sec",
-    "10 min 0 sec",
-    "4 min 30 sec",
-    "15 min 5 sec",
-    "7 min 28 sec"
+[{
+  "title": "Why You Shouldn’t Unlock Your Phone With Your Face",
+  "description": "Today Apple announced its new FaceID technology. It’s a new way to unlock your phone through facial recognition. All you have to do is look…",
+  "photo": "https://unsplash.it/500/200/?random=1",
+  "author": "$10.47",
+  "authorPhoto": "photo",
+  "time": "2 min 3 sec"
+}, {
 
-  ],
-  "photos": [
-    "https://unsplash.it/500/200/?random=12",
-    "https://unsplash.it/500/200/?random=13",
-    "https://unsplash.it/500/200/?random=14",
-    "https://unsplash.it/500/200/?random=15",
-    "https://unsplash.it/500/200/?random=16",
-    "https://unsplash.it/500/200/?random=17",
-    "https://unsplash.it/500/200/?random=18",
-    "https://unsplash.it/500/200/?random=19",
-    "https://unsplash.it/500/200/?random=10",
-    "https://unsplash.it/500/200/?random=11",
-    "https://unsplash.it/500/200/?random=111",
-    "https://unsplash.it/500/200/?random=122",
-    "https://unsplash.it/500/200/?random=133",
-    "https://unsplash.it/500/200/?random=144",
-    "https://unsplash.it/500/200/?random=155",
-    "https://unsplash.it/500/200/?random=166",
-    "https://unsplash.it/500/200/?random=177",
-    "https://unsplash.it/500/200/?random=188",
-    "https://unsplash.it/500/200/?random=199",
-    "https://unsplash.it/500/200/?random=112"
-  ],
-  "userphotos": [
-    "https://randomuser.me/api/portraits/men/35.jpg",
-    "https://randomuser.me/api/portraits/women/34.jpg",
-    "https://randomuser.me/api/portraits/men/33.jpg",
-    "https://randomuser.me/api/portraits/men/32.jpg",
-    "https://randomuser.me/api/portraits/men/31.jpg",
-    "https://randomuser.me/api/portraits/men/30.jpg",
-    "https://randomuser.me/api/portraits/women/29.jpg",
-    "https://randomuser.me/api/portraits/men/28.jpg",
-    "https://randomuser.me/api/portraits/men/27.jpg",
-    "https://randomuser.me/api/portraits/men/26.jpg",
-    "https://randomuser.me/api/portraits/men/25.jpg",
-    "https://randomuser.me/api/portraits/women/24.jpg",
-    "https://randomuser.me/api/portraits/men/23.jpg",
-    "https://randomuser.me/api/portraits/men/22.jpg",
-    "https://randomuser.me/api/portraits/women/21.jpg",
-    "https://randomuser.me/api/portraits/men/20.jpg",
-    "https://randomuser.me/api/portraits/men/19.jpg"
-  ]
-}
+  "title": "What Every Software Engineer Should Know About Search",
+  "description": "Want to build or improve a search experience? Start here.",
+  "photo": "https://unsplash.it/500/200/?random=2",
+  "author": "$10.47",
+  "authorPhoto": "photo",
+  "time": "2 min 3 sec"
+}, {
+
+  "title": "Financing Suburbia",
+  "description": "How government mortgage policy determined where you live",
+  "photo": "https://unsplash.it/500/200/?random=3",
+  "author": "$10.47",
+  "authorPhoto": "photo",
+  "time": "2 min 3 sec"
+  }, {
+
+  "title": "AI: Scary for the Right Reasons",
+  "description": "Artificial intelligence, AI, has grabbed headlines, hype, and even consternation at the beast we are unleashing. Every powerful technology…",
+  "photo": "https://unsplash.it/500/200/?random=4",
+  "author": "$10.47",
+  "authorPhoto": "photo",
+  "time": "2 min 3 sec"
+  }, {
+
+  "title": "Closing in on Cancer",
+  "description": "Science will win the technical battle against cancer. But that is only half the fight.",
+  "photo": "https://unsplash.it/500/200/?random=5",
+  "author": "$10.47",
+  "authorPhoto": "photo",
+  "time": "2 min 3 sec"
+  }, {
+
+  "title": "Myths and Facts About Veganism",
+  "description": "More of us find the diet appealing — but is it healthy?",
+  "photo": "https://unsplash.it/500/200/?random=6",
+  "author": "$10.47",
+  "authorPhoto": "photo",
+  "time": "2 min 3 sec"
+  }, {
+}]
