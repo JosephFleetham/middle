@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import cards from "./data.json"
+import update from 'react-addons-update';
 
 const App = React.createClass({
   getInitialState: function () {
     return {
-      cards: [],
-      persons: []
+      cards: []
     };
   },
+
   componentDidMount: function () {
-    this.updateState();
     var that = this;
-    var url = 'https://randomuser.me/api/'
+    var url = 'https://randomuser.me/api/?results=6'
+    this.updateState();
 
     fetch(url)
     .then(function(response) {
@@ -23,7 +24,42 @@ const App = React.createClass({
       return response.json();
     })
     .then(function(data) {
-      that.setState({ persons: data.results });
+      that.setState({
+        cards: update(that.state.cards, {0: {author: {$set: data.results[0].name.first + " " + data.results[0].name.last}}})
+      }),
+      that.setState({
+        cards: update(that.state.cards, {0: {authorPhoto: {$set: data.results[0].picture.thumbnail}}})
+      })
+      that.setState({
+        cards: update(that.state.cards, {1: {author: {$set: data.results[1].name.first + " " + data.results[1].name.last}}})
+      }),
+      that.setState({
+        cards: update(that.state.cards, {1: {authorPhoto: {$set: data.results[1].picture.thumbnail}}})
+      })
+      that.setState({
+        cards: update(that.state.cards, {2: {author: {$set: data.results[2].name.first + " " + data.results[2].name.last}}})
+      }),
+      that.setState({
+        cards: update(that.state.cards, {2: {authorPhoto: {$set: data.results[2].picture.thumbnail}}})
+      })
+      that.setState({
+        cards: update(that.state.cards, {3: {author: {$set: data.results[3].name.first + " " + data.results[3].name.last}}})
+      }),
+      that.setState({
+        cards: update(that.state.cards, {3: {authorPhoto: {$set: data.results[3].picture.thumbnail}}})
+      })
+      that.setState({
+        cards: update(that.state.cards, {4: {author: {$set: data.results[4].name.first + " " + data.results[4].name.last}}})
+      }),
+      that.setState({
+        cards: update(that.state.cards, {4: {authorPhoto: {$set: data.results[4].picture.thumbnail}}})
+      })
+      that.setState({
+        cards: update(that.state.cards, {5: {author: {$set: data.results[5].name.first + " " + data.results[5].name.last}}})
+      }),
+      that.setState({
+        cards: update(that.state.cards, {5: {authorPhoto: {$set: data.results[5].picture.thumbnail}}})
+      })
     });
 
   },
@@ -42,7 +78,6 @@ const App = React.createClass({
         <br />
           <CardList
             cards={this.state.cards}
-            persons={this.state.persons}
           />
       </div>
     );
@@ -72,14 +107,9 @@ const CardList = React.createClass({
         title={card.title}
         description={card.description}
         photo={card.photo}
+        author={card.author}
         authorPhoto={card.authorPhoto}
         time={card.time}
-
-      />
-    ));
-    const persons = this.props.persons.map((persons) => (
-      <Card
-        author={persons.gender}
 
       />
     ));
@@ -89,7 +119,6 @@ const CardList = React.createClass({
         </div>
         <div className="five wide column">
           {cards[0]}
-          {persons}
         </div>
         <div className="one wide column">
         </div>
@@ -129,7 +158,9 @@ const CardList = React.createClass({
 });
 
 const Card = React.createClass({
+
   render: function () {
+  var titleCase = require('title-case');
     return (
       <div id="box">
         <img src={this.props.photo} alt="cover"></img>
@@ -139,7 +170,7 @@ const Card = React.createClass({
         </div>
         <div className="Author">
           <img src={this.props.authorPhoto} alt="authorPhoto"></img>
-          <div className="author">{this.props.author}</div>
+          <div className="author">{titleCase(this.props.author)}</div>
           <div className="time">{this.props.time}</div>
         </div>
       </div>
