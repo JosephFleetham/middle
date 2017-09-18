@@ -25,41 +25,59 @@ const App = React.createClass({
     })
     .then(function(data) {
       that.setState({
-        cards: update(that.state.cards, {0: {author: {$set: data.results[0].name.first + " " + data.results[0].name.last}}})
+        cards: update(that.state.cards, {0: {author: {$set: data.results[0].name.first + " " + data.results[0].name.last}}, authorPhoto: {$set: data.results[0].picture.thumbnail}})
       }),
       that.setState({
         cards: update(that.state.cards, {0: {authorPhoto: {$set: data.results[0].picture.thumbnail}}})
-      })
+      }),
+      that.setState({
+        cards: update(that.state.cards, {0: {time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}}})
+      }),
       that.setState({
         cards: update(that.state.cards, {1: {author: {$set: data.results[1].name.first + " " + data.results[1].name.last}}})
       }),
       that.setState({
         cards: update(that.state.cards, {1: {authorPhoto: {$set: data.results[1].picture.thumbnail}}})
-      })
+      }),
+      that.setState({
+        cards: update(that.state.cards, {1: {time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}}})
+      }),
       that.setState({
         cards: update(that.state.cards, {2: {author: {$set: data.results[2].name.first + " " + data.results[2].name.last}}})
       }),
       that.setState({
         cards: update(that.state.cards, {2: {authorPhoto: {$set: data.results[2].picture.thumbnail}}})
-      })
+      }),
+      that.setState({
+        cards: update(that.state.cards, {2: {time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}}})
+      }),
       that.setState({
         cards: update(that.state.cards, {3: {author: {$set: data.results[3].name.first + " " + data.results[3].name.last}}})
       }),
       that.setState({
         cards: update(that.state.cards, {3: {authorPhoto: {$set: data.results[3].picture.thumbnail}}})
-      })
+      }),
+      that.setState({
+        cards: update(that.state.cards, {3: {time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}}})
+      }),
       that.setState({
         cards: update(that.state.cards, {4: {author: {$set: data.results[4].name.first + " " + data.results[4].name.last}}})
       }),
       that.setState({
         cards: update(that.state.cards, {4: {authorPhoto: {$set: data.results[4].picture.thumbnail}}})
-      })
+      }),
+      that.setState({
+        cards: update(that.state.cards, {4: {time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}}})
+      }),
       that.setState({
         cards: update(that.state.cards, {5: {author: {$set: data.results[5].name.first + " " + data.results[5].name.last}}})
       }),
       that.setState({
         cards: update(that.state.cards, {5: {authorPhoto: {$set: data.results[5].picture.thumbnail}}})
-      })
+      }),
+      that.setState({
+        cards: update(that.state.cards, {4: {time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}}})
+      });
     });
 
   },
@@ -170,7 +188,7 @@ const Card = React.createClass({
         </div>
         <div className="Author">
           <img src={this.props.authorPhoto} alt="authorPhoto"></img>
-          <div className="author">{titleCase(this.props.author)}</div>
+          <div className="name">{titleCase(this.props.author)}</div>
           <div className="time">{this.props.time}</div>
         </div>
       </div>

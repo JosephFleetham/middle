@@ -24,14 +24,69 @@
 }
 
 #box {
-  margin-top: 50px;
+  margin: 40px;
+  display: inline-block;
+  position: relative;
+  background: #ffff;
   width: 500px;
   height: 405px;
   border: 0px solid black;
   box-shadow: 0 19px 38px rgba(0,0,0,.1), 0 15px 12px rgba(0,0,0,.12);
   border-radius: 8px;
   box-sizing: border-box;
-  margin-left: 20px;
+  margin-left: 0px;
+  margin-bottom: 0px;
+}
+
+#box .Author .name {
+  position: absolute;
+  font-family: 'Roboto Slab', serif;
+  color: #6d6d6d;
+  font-weight: 600;
+  font-size: 16px;
+  left: 64px;
+  bottom: 30px;
+}
+
+#box .Author .time {
+  color: #adadad;
+  position: absolute;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 800;
+  font-size: .7em;
+  bottom: 13px;
+  left: 64px;
+
+}
+
+#box .Author img {
+  position: absolute;
+  border-radius: 50%;
+  width: 40px;
+  left: 15px;
+  bottom: 10px;
+}
+
+.CardContent p {
+    width: 95%;
+    font-family: 'Roboto Slab' serif;
+    font-weight: 300;
+    font-size: 1em;
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.CardContent h1 {
+  font-family: 'Teko', sans-serif;
+  font-size: 1.8em;
+  text-transform: uppercase;
+  font-stretch: condensed;
+  font-weight: 800;
+  margin-top: 12px;
+  margin-bottom: 0;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 #topnav {
