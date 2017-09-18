@@ -76,7 +76,7 @@ const App = React.createClass({
         cards: update(that.state.cards, {5: {authorPhoto: {$set: data.results[5].picture.thumbnail}}})
       }),
       that.setState({
-        cards: update(that.state.cards, {4: {time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}}})
+        cards: update(that.state.cards, {5: {time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}}})
       });
     });
 
@@ -186,11 +186,11 @@ const Card = React.createClass({
           <h1>{this.props.title}</h1>
           <p>{this.props.description}</p>
         </div>
-        <div className="Author">
-          <img src={this.props.authorPhoto} alt="authorPhoto"></img>
-          <div className="name">{titleCase(this.props.author)}</div>
-          <div className="time">{this.props.time}</div>
-        </div>
+          <div className="Author">
+            <img src={this.props.authorPhoto} alt="authorPhoto"></img>
+            <div className="name">{titleCase(this.props.author)}</div>
+            <div className="time">{this.props.time}</div>
+          </div>
       </div>
     )
   }
