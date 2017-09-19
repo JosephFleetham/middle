@@ -137,34 +137,14 @@ const CardList = React.createClass({
         </div>
         <div className="five wide column">
           {cards[0]}
-        </div>
-        <div className="one wide column">
-        </div>
-        <div className="five wide column">
           {cards[1]}
-        </div>
-        <div className="two wide column">
-        </div>
-        <div className="two wide column">
-        </div>
-        <div className="five wide column">
           {cards[2]}
         </div>
         <div className="one wide column">
         </div>
         <div className="five wide column">
           {cards[3]}
-        </div>
-        <div className="two wide column">
-        </div>
-        <div className="two wide column">
-        </div>
-        <div className="five wide column">
           {cards[4]}
-        </div>
-        <div className="one wide column">
-        </div>
-        <div className="five wide column">
           {cards[5]}
         </div>
         <div className="two wide column">
