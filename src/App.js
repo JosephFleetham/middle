@@ -11,7 +11,7 @@ const App = React.createClass({
     };
   },
 
-  componentDidMount: function () {
+  componentWillMount: function () {
     var that = this;
     var url = 'https://randomuser.me/api/?results=6'
     this.updateState();
@@ -132,13 +132,15 @@ const CardList = React.createClass({
       />
     ));
     return (
-      <div className="ui four doubling centered stackable cards">
-          {cards[0]}
-          {cards[1]}
-          {cards[2]}
-          {cards[3]}
-          {cards[4]}
-          {cards[5]}
+      <div id="CardList">
+        <div className="ui four doubling centered stackable cards">
+            {cards[0]}
+            {cards[1]}
+            {cards[2]}
+            {cards[3]}
+            {cards[4]}
+            {cards[5]}
+        </div>
       </div>
     );
   },
@@ -155,11 +157,18 @@ const Card = React.createClass({
           <h1>{this.props.title}</h1>
           <p>{this.props.description}</p>
         </div>
-          <div className="Author">
-            <img src={this.props.authorPhoto} alt="authorPhoto"></img>
-            <div className="name">{titleCase(this.props.author)}</div>
-            <div className="time">{this.props.time}</div>
-          </div>
+        <div className="Author">
+          <img src={this.props.authorPhoto} alt="authorPhoto"></img>
+          <div className="name">{titleCase(this.props.author)}</div>
+          <div className="time">{this.props.time}</div>
+        </div>
+        <div className="Stats">
+          <img className="heart" src="http://i.imgur.com/iPhyYk7.png" alt="heart"></img>
+          <div className="stat">727</div>
+          <span> | </span>
+          <img className="comment" src="http://i.imgur.com/w9zMniq.png" alt="comment"></img>
+          <div className="stat">69</div>
+        </div>
       </div>
     )
   }
@@ -171,26 +180,22 @@ class TopNav extends Component {
       <div id="topnav">
         <div className="ui three column grid">
           <div className="column">
-            <div className="ui segment">
+            <div id="new">
               <a className="yellow item" href="#">Write a story...</a>
             </div>
           </div>
             <div className="column">
-              <div className="ui segment">
-                <div className="yellow item" href="#"><h1>Middle</h1></div>
-              </div>
+              <div className="title" href="#"><h1>Middle</h1></div>
             </div>
           <div className="column">
-            <div className="ui segment">
-              <div id='signinsearch'>
-                <a className="light green item active" href="#">
-                  Sign in/Sign up<br />
-                  <div id='searchicon'>
-                    <a className="light green item" href="##">
-                      <i className='search icon'>
-                      </i>
-                    </a>
-                  </div>
+            <div id='signinsearch'>
+              <a className="SignIn" href="#">
+                Sign in/Sign up
+              </a>
+              <div id='searchicon'>
+                <a className="light green item" href="##">
+                  <i className='search icon'>
+                  </i>
                 </a>
               </div>
             </div>

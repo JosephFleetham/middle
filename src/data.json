@@ -4,7 +4,9 @@
   "photo": "https://unsplash.it/500/200/?random=1",
   "author": " ",
   "authorPhoto": "photo",
-  "time": "Math.random() min 3 sec"
+  "time": "Math.random() min 3 sec",
+  "likes": " ",
+  "comments": " "
 }, {
 
   "title": "What Every Web Designer Should Know",
@@ -12,7 +14,9 @@
   "photo": "https://unsplash.it/500/200/?random=2",
   "author": " ",
   "authorPhoto": "photo",
-  "time": "2 min 3 sec"
+  "time": "2 min 3 sec",
+  "likes": " ",
+  "comments": " "
 }, {
 
   "title": "Financing Suburbia",
@@ -20,7 +24,9 @@
   "photo": "https://unsplash.it/500/200/?random=3",
   "author": " ",
   "authorPhoto": "photo",
-  "time": "2 min 3 sec"
+  "time": "2 min 3 sec",
+  "likes": " ",
+  "comments": " "
   }, {
 
   "title": "AI: Scary for the Right Reasons",
@@ -28,7 +34,9 @@
   "photo": "https://unsplash.it/500/200/?random=4",
   "author": " ",
   "authorPhoto": "photo",
-  "time": "2 min 3 sec"
+  "time": "2 min 3 sec",
+  "likes": " ",
+  "comments": " "
   }, {
 
   "title": "Closing in on Cancer",
@@ -36,7 +44,9 @@
   "photo": "https://unsplash.it/500/200/?random=5",
   "author": " ",
   "authorPhoto": "photo",
-  "time": "2 min 3 sec"
+  "time": "2 min 3 sec",
+  "likes": " ",
+  "comments": " "
   }, {
 
   "title": "Myths and Facts About Veganism",
@@ -44,6 +54,8 @@
   "photo": "https://unsplash.it/500/200/?random=6",
   "author": " ",
   "authorPhoto": "photo",
-  "time": "2 min 3 sec"
+  "time": "2 min 3 sec",
+  "likes": " ",
+  "comments": " "
   }, {
 }]
