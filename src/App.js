@@ -132,26 +132,15 @@ const CardList = React.createClass({
       />
     ));
     return (
-      <div className="ui grid">
-        <div className="two wide column">
-        </div>
-        <div className="five wide column">
+      <div className="ui four doubling centered stackable cards">
           {cards[0]}
           {cards[1]}
           {cards[2]}
-        </div>
-        <div className="one wide column">
-        </div>
-        <div className="five wide column">
           {cards[3]}
           {cards[4]}
           {cards[5]}
-        </div>
-        <div className="two wide column">
-        </div>
       </div>
     );
-    // leanpub-end-insert
   },
 });
 
@@ -180,32 +169,32 @@ class TopNav extends Component {
   render() {
     return (
       <div id="topnav">
-        <div className="ui relaxed grid">
-            <div className="sixteen wide column">
-                <div className="ui grid text menu">
-                  <div className="two wide column"></div>
-                    <div className="five wide column">
-                        <a className="yellow item" href="#">Write a story...</a>
-                    </div>
-                    <div className="five wide column">
-                        <div className="yellow item" href="#"><h1>Middle</h1></div>
-                    </div>
-                    <div className="three wide column">
-                        <div id='signinsearch'>
-                          <a className="light green item active" href="#">
-                            Sign in/Sign up<br />
-                              <div id='searchicon'>
-                                <a className="light green item" href="##">
-                                  <i className='search icon'>
-                                  </i>
-                                </a>
-                              </div>
-                          </a>
-                        </div>
-                    </div>
-                    <div className="one wide column"></div>
-                </div>
+        <div className="ui three column grid">
+          <div className="column">
+            <div className="ui segment">
+              <a className="yellow item" href="#">Write a story...</a>
             </div>
+          </div>
+            <div className="column">
+              <div className="ui segment">
+                <div className="yellow item" href="#"><h1>Middle</h1></div>
+              </div>
+            </div>
+          <div className="column">
+            <div className="ui segment">
+              <div id='signinsearch'>
+                <a className="light green item active" href="#">
+                  Sign in/Sign up<br />
+                  <div id='searchicon'>
+                    <a className="light green item" href="##">
+                      <i className='search icon'>
+                      </i>
+                    </a>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

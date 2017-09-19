@@ -101,6 +101,7 @@
 
 #topnav h1 {
   font-family: 'Merriweather', serif;
+  position: relative;
   color: #333333;
   font-style: normal;
   font-weight: bolder;
@@ -111,9 +112,11 @@
 
 #topnav a {
   font-size: 20px;
+  position: relative;
   color: rgba(0,0,0,.35);
 }
 
 #signinsearch {
+  position: relative;  
   margin-top: -3px;
 }
