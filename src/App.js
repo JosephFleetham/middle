@@ -105,22 +105,7 @@ const CardList = React.createClass({
   // this.setState({
   //   data: update(this.state.data, {$splice: [[index, 1]]})
   // }),
-  getInitialState: function () {
-    return {
-      votes: []
-    }
-  },
-  componentWillMount: function () {
-    var joined = this.state.votes.push(cards.votes);
-    this.setState({
-      votes: joined
-    });
-  },
-  handleUpVote: function () {
-    this.setState({
-      votes: this.state.votes + 1
-    });
-  },
+
   render: function () {
     // leanpub-start-insert
     const cards = this.props.cards.map((card) => (
@@ -132,7 +117,6 @@ const CardList = React.createClass({
         author={card.author}
         authorPhoto={card.authorPhoto}
         time={card.time}
-        votes={this.state.votes}
         comments={card.comments}
         onUpVote={this.handleUpVote}
 
@@ -154,8 +138,21 @@ const CardList = React.createClass({
 });
 
 const Card = React.createClass({
+  getInitialState: function () {
+    return {
+      votes: []
+    }
+  },
+  componentWillMount: function () {
+    var joined = this.state.votes.push(cards.votes);
+    this.setState({
+      votes: joined
+    });
+  },
   handleUpVote: function () {
-      this.props.onUpVote(this.props.id);
+    this.setState({
+      votes: this.state.votes + 1
+    });
   },
   render: function () {
   var titleCase = require('title-case');
@@ -175,7 +172,7 @@ const Card = React.createClass({
           <a onClick={this.handleUpVote}>
             <img className="heart" src="http://i.imgur.com/iPhyYk7.png" alt="heart"></img>
           </a>
-          <div className="stat">{this.props.votes}</div>
+          <div className="stat">{this.state.votes}</div>
           <span> | </span>
           <img className="comment" src="http://i.imgur.com/w9zMniq.png" alt="comment"></img>
           <div className="stat">{this.props.comments}</div>
