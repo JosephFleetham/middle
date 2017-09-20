@@ -1,61 +1,62 @@
 [{
+  "id": "1",
   "title": "Why You Shouldn’t Unlock Your Phone With Your Face",
   "description": "Today Apple announced its new FaceID technology. It’s a new way to unlock your phone through facial recognition. All you have to do is…",
   "photo": "https://unsplash.it/500/200/?random=1",
   "author": " ",
   "authorPhoto": "photo",
   "time": "Math.random() min 3 sec",
-  "likes": " ",
-  "comments": " "
+  "votes": " ",
+  "comments": ""
 }, {
-
+  "id": "2",
   "title": "What Every Web Designer Should Know",
   "description": "Want to build or improve a user experience? Start here.",
   "photo": "https://unsplash.it/500/200/?random=2",
   "author": " ",
   "authorPhoto": "photo",
   "time": "2 min 3 sec",
-  "likes": " ",
-  "comments": " "
+  "votes": " ",
+  "comments": ""
 }, {
-
+  "id": "3",
   "title": "Financing Suburbia",
   "description": "How government mortgage policy determined where you live",
   "photo": "https://unsplash.it/500/200/?random=3",
   "author": " ",
   "authorPhoto": "photo",
   "time": "2 min 3 sec",
-  "likes": " ",
-  "comments": " "
+  "votes": " ",
+  "comments": ""
   }, {
-
+  "id": "4",
   "title": "AI: Scary for the Right Reasons",
   "description": "Artificial intelligence, AI, has grabbed headlines, hype, and even consternation at the beast we are unleashing. Every powerful technology…",
   "photo": "https://unsplash.it/500/200/?random=4",
   "author": " ",
   "authorPhoto": "photo",
   "time": "2 min 3 sec",
-  "likes": " ",
-  "comments": " "
+  "votes": " ",
+  "comments": ""
   }, {
-
+  "id": "5",
   "title": "Closing in on Cancer",
   "description": "Science will win the technical battle against cancer. But that is only half the fight.",
   "photo": "https://unsplash.it/500/200/?random=5",
   "author": " ",
   "authorPhoto": "photo",
   "time": "2 min 3 sec",
-  "likes": " ",
-  "comments": " "
+  "votes": " ",
+  "comments": ""
   }, {
-
+  "id": "6",
   "title": "Myths and Facts About Veganism",
   "description": "More of us find the diet appealing — but is it healthy?",
   "photo": "https://unsplash.it/500/200/?random=6",
   "author": " ",
   "authorPhoto": "photo",
   "time": "2 min 3 sec",
-  "likes": " ",
-  "comments": " "
+  "votes": " ",
+  "comments": ""
   }, {
 }]

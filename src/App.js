@@ -7,7 +7,9 @@ import update from 'react-addons-update';
 const App = React.createClass({
   getInitialState: function () {
     return {
-      cards: []
+      cards: [],
+      votes: [],
+      comments: []
     };
   },
 
@@ -29,41 +31,47 @@ const App = React.createClass({
           0: {
             author: {$set: data.results[0].name.first + " " + data.results[0].name.last},
             authorPhoto: {$set: data.results[0].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}
+            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
+            comments: {$set: (Math.floor(Math.random() * 40))},
           },
           1: {
             author: {$set: data.results[1].name.first + " " + data.results[1].name.last},
             authorPhoto: {$set: data.results[1].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}
+            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
+            comments: {$set: (Math.floor(Math.random() * 40))},
           },
           2: {
             author: {$set: data.results[2].name.first + " " + data.results[2].name.last},
             authorPhoto: {$set: data.results[2].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}
+            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
+            comments: {$set: (Math.floor(Math.random() * 40))},
           },
           3: {
             author: {$set: data.results[3].name.first + " " + data.results[3].name.last},
             authorPhoto: {$set: data.results[3].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}
+            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
+            comments: {$set: (Math.floor(Math.random() * 40))},
           },
           4: {
             author: {$set: data.results[4].name.first + " " + data.results[4].name.last},
             authorPhoto: {$set: data.results[4].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}
+            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
+            comments: {$set: (Math.floor(Math.random() * 40))},
           },
           5: {
             author: {$set: data.results[5].name.first + " " + data.results[5].name.last},
             authorPhoto: {$set: data.results[5].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"}
+            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
+            comments: {$set: (Math.floor(Math.random() * 40))},
           },
         })
       });
     });
-
   },
   updateState: function () {
     this.setState({ cards: cards });
   },
+
   render() {
     return (
       <div className="filler">
@@ -97,17 +105,36 @@ const CardList = React.createClass({
   // this.setState({
   //   data: update(this.state.data, {$splice: [[index, 1]]})
   // }),
-
+  getInitialState: function () {
+    return {
+      votes: []
+    }
+  },
+  componentWillMount: function () {
+    var joined = this.state.votes.push(cards.votes);
+    this.setState({
+      votes: joined
+    });
+  },
+  handleUpVote: function () {
+    this.setState({
+      votes: this.state.votes + 1
+    });
+  },
   render: function () {
     // leanpub-start-insert
     const cards = this.props.cards.map((card) => (
       <Card
+        id={card.id}
         title={card.title}
         description={card.description}
         photo={card.photo}
         author={card.author}
         authorPhoto={card.authorPhoto}
         time={card.time}
+        votes={this.state.votes}
+        comments={card.comments}
+        onUpVote={this.handleUpVote}
 
       />
     ));
@@ -127,7 +154,9 @@ const CardList = React.createClass({
 });
 
 const Card = React.createClass({
-
+  handleUpVote: function () {
+      this.props.onUpVote(this.props.id);
+  },
   render: function () {
   var titleCase = require('title-case');
     return (
@@ -143,11 +172,13 @@ const Card = React.createClass({
           <div className="time">{this.props.time}</div>
         </div>
         <div className="Stats">
-          <img className="heart" src="http://i.imgur.com/iPhyYk7.png" alt="heart"></img>
-          <div className="stat">727</div>
+          <a onClick={this.handleUpVote}>
+            <img className="heart" src="http://i.imgur.com/iPhyYk7.png" alt="heart"></img>
+          </a>
+          <div className="stat">{this.props.votes}</div>
           <span> | </span>
           <img className="comment" src="http://i.imgur.com/w9zMniq.png" alt="comment"></img>
-          <div className="stat">69</div>
+          <div className="stat">{this.props.comments}</div>
         </div>
       </div>
     )
