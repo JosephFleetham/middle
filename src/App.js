@@ -7,9 +7,7 @@ import update from 'react-addons-update';
 const App = React.createClass({
   getInitialState: function () {
     return {
-      cards: [],
-      votes: [],
-      comments: []
+      cards: []
     };
   },
 
@@ -91,23 +89,7 @@ const App = React.createClass({
 });
 
 const CardList = React.createClass({
-  // onNewCard: function(index) {
-  //   var newData = this.state.cards.slice(); //copy array
-  //   newData.splice(index, 1); //remove element
-  //   this.setState({cards: newData}); //update state
-  // },
-  // handleNewCard: function (cards) {
-  //   this.onNewCard();
-  // },
-  // componentDidMount: function () {
-  //   this.handleNewCard();
-  // },
-  // this.setState({
-  //   data: update(this.state.data, {$splice: [[index, 1]]})
-  // }),
-
   render: function () {
-    // leanpub-start-insert
     const cards = this.props.cards.map((card) => (
       <Card
         id={card.id}
@@ -140,19 +122,38 @@ const CardList = React.createClass({
 const Card = React.createClass({
   getInitialState: function () {
     return {
-      votes: []
+      votes: [],
+      voted: [],
+      heart: []
     }
   },
   componentWillMount: function () {
-    var joined = this.state.votes.push(cards.votes);
+    var random = (Math.floor(Math.random() * 150) + 1);
+    var emptyHeart= "http://i.imgur.com/iPhyYk7.png"
     this.setState({
-      votes: joined
+      votes: random,
+      voted: false,
+      heart: emptyHeart
     });
   },
+
   handleUpVote: function () {
-    this.setState({
-      votes: this.state.votes + 1
-    });
+    var fullHeart = "http://i.imgur.com/rzmv6N6.png"
+    var emptyHeart= "http://i.imgur.com/iPhyYk7.png"
+    if (this.state.voted === false) {
+      this.setState({
+        votes: this.state.votes + 1,
+        voted: true,
+        heart: fullHeart
+      });
+    }
+    else {
+      this.setState({
+        votes: this.state.votes - 1,
+        voted: false,
+        heart: emptyHeart
+      })
+    }
   },
   render: function () {
   var titleCase = require('title-case');
@@ -170,7 +171,7 @@ const Card = React.createClass({
         </div>
         <div className="Stats">
           <a onClick={this.handleUpVote}>
-            <img className="heart" src="http://i.imgur.com/iPhyYk7.png" alt="heart"></img>
+            <img className="heart" src={this.state.heart} alt="heart"></img>
           </a>
           <div className="stat">{this.state.votes}</div>
           <span> | </span>
