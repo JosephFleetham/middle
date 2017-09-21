@@ -36,6 +36,7 @@ const App = React.createClass({
       return response.json();
     })
     .then(function(data) {
+      // is there a way to clean this up? One update function with a loop to account for more cards being added?
       that.setState({
         cards: update(that.state.cards, {
           0: {
@@ -80,6 +81,9 @@ const App = React.createClass({
   },
   updateState: function () {
     this.setState({ cards: data });
+  },
+  componentDidMount: function () {
+    console.log(this.state.cards);
   },
 
   render() {
