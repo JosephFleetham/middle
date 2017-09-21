@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import cards from "./data.json"
+import data from "./data.json"
 import update from 'react-addons-update';
+
+
+function shuffleArray(array) {
+  let i = array.length - 1;
+  for (; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
 
 const App = React.createClass({
   getInitialState: function () {
@@ -67,7 +79,7 @@ const App = React.createClass({
     });
   },
   updateState: function () {
-    this.setState({ cards: cards });
+    this.setState({ cards: data });
   },
 
   render() {
@@ -89,6 +101,22 @@ const App = React.createClass({
 });
 
 const CardList = React.createClass({
+
+  getInitialState: function () {
+    return {
+      index: []
+    }
+  },
+  componentWillMount: function () {
+    var numbers = [];
+    if (numbers.length !== data.length) {
+      for (var i=0;i<data.length;i++) {
+        numbers.push(i);
+      }
+    }
+    shuffleArray(numbers);
+    this.setState({ index: numbers });
+  },
   render: function () {
     const cards = this.props.cards.map((card) => (
       <Card
@@ -99,6 +127,7 @@ const CardList = React.createClass({
         author={card.author}
         authorPhoto={card.authorPhoto}
         time={card.time}
+        votes={card.votes}
         comments={card.comments}
         onUpVote={this.handleUpVote}
 
@@ -107,12 +136,12 @@ const CardList = React.createClass({
     return (
       <div id="CardList">
         <div className="ui four doubling centered stackable cards">
-            {cards[0]}
-            {cards[1]}
-            {cards[2]}
-            {cards[3]}
-            {cards[4]}
-            {cards[5]}
+            {cards[this.state.index[0]]}
+            {cards[this.state.index[1]]}
+            {cards[this.state.index[2]]}
+            {cards[this.state.index[3]]}
+            {cards[this.state.index[4]]}
+            {cards[this.state.index[5]]}
         </div>
       </div>
     );
