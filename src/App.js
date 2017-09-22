@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import data from "./data.json"
+import localData from "./data.json"
 import update from 'react-addons-update';
 
 
@@ -19,14 +19,16 @@ function shuffleArray(array) {
 const App = React.createClass({
   getInitialState: function () {
     return {
-      cards: []
+      cards: [],
+      users: []
     };
   },
 
-  componentWillMount: function () {
+  componentDidMount: function () {
+    this.setState({ cards: localData });
+    var index = localData.length
     var that = this;
-    var url = 'https://randomuser.me/api/?results=6'
-    this.updateState();
+    var url = "https://randomuser.me/api/?results=" + index
 
     fetch(url)
     .then(function(response) {
@@ -38,54 +40,28 @@ const App = React.createClass({
     .then(function(data) {
       // is there a way to clean this up? One update function with a loop to account for more cards being added?
       that.setState({
-        cards: update(that.state.cards, {
-          0: {
-            author: {$set: data.results[0].name.first + " " + data.results[0].name.last},
-            authorPhoto: {$set: data.results[0].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
-            comments: {$set: (Math.floor(Math.random() * 40))},
-          },
-          1: {
-            author: {$set: data.results[1].name.first + " " + data.results[1].name.last},
-            authorPhoto: {$set: data.results[1].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
-            comments: {$set: (Math.floor(Math.random() * 40))},
-          },
-          2: {
-            author: {$set: data.results[2].name.first + " " + data.results[2].name.last},
-            authorPhoto: {$set: data.results[2].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
-            comments: {$set: (Math.floor(Math.random() * 40))},
-          },
-          3: {
-            author: {$set: data.results[3].name.first + " " + data.results[3].name.last},
-            authorPhoto: {$set: data.results[3].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
-            comments: {$set: (Math.floor(Math.random() * 40))},
-          },
-          4: {
-            author: {$set: data.results[4].name.first + " " + data.results[4].name.last},
-            authorPhoto: {$set: data.results[4].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
-            comments: {$set: (Math.floor(Math.random() * 40))},
-          },
-          5: {
-            author: {$set: data.results[5].name.first + " " + data.results[5].name.last},
-            authorPhoto: {$set: data.results[5].picture.thumbnail},
-            time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
-            comments: {$set: (Math.floor(Math.random() * 40))},
-          },
-        })
+        users: data.results
       });
+      that.loopApiData();
     });
   },
-  updateState: function () {
-    this.setState({ cards: data });
+  updateState: function (i) {
+    this.setState({
+      cards:  update(this.state.cards, {
+        [i]: {
+          author: {$set: this.state.users[i].name.first + " " + this.state.users[i].name.last},
+          authorPhoto: {$set: this.state.users[i].picture.thumbnail},
+          time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
+          comments: {$set: (Math.floor(Math.random() * 40))},
+        },
+      })
+    })
   },
-  componentDidMount: function () {
-    console.log(this.state.cards);
+  loopApiData: function () {
+    for (var i=0; i<localData.length;i++) {
+      this.updateState(i);
+    }
   },
-
   render() {
     return (
       <div className="filler">
@@ -113,8 +89,8 @@ const CardList = React.createClass({
   },
   componentWillMount: function () {
     var numbers = [];
-    if (numbers.length !== data.length) {
-      for (var i=0;i<data.length;i++) {
+    if (numbers.length !== localData.length) {
+      for (var i=0;i<localData.length;i++) {
         numbers.push(i);
       }
     }
