@@ -20,7 +20,7 @@ const App = React.createClass({
   getInitialState: function () {
     return {
       cards: [],
-      users: []
+      userData: []
     };
   },
 
@@ -38,28 +38,25 @@ const App = React.createClass({
       return response.json();
     })
     .then(function(data) {
-      that.setState({
-        users: data.results
-      });
-      that.loopApiData();
+      that.loopApiData(data);
     });
   },
-  updateState: function (i) {
+  updateState: function (i, data) {
     this.setState({
       cards:  update(this.state.cards, {
         [i]: {
           photo: {$set: ("https://unsplash.it/500/200/?random=" + i)},
-          author: {$set: this.state.users[i].name.first + " " + this.state.users[i].name.last},
-          authorPhoto: {$set: this.state.users[i].picture.thumbnail},
+          author: {$set: data.results[i].name.first + " " + data.results[i].name.last},
+          authorPhoto: {$set: data.results[i].picture.thumbnail},
           time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
           comments: {$set: (Math.floor(Math.random() * 40))}
         },
       })
     })
   },
-  loopApiData: function () {
+  loopApiData: function (data) {
     for (var i=0; i<localData.length;i++) {
-      this.updateState(i);
+      this.updateState(i, data);
     }
   },
   render() {
