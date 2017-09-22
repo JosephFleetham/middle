@@ -25,9 +25,8 @@ const App = React.createClass({
 
   componentWillMount: function () {
     this.setState({ cards: localData });
-    var index = localData.length
     var that = this;
-    var url = "https://randomuser.me/api/?results=" + index
+    var url = "https://randomuser.me/api/?results=" + localData.length
 
     fetch(url)
     .then(function(response) {
