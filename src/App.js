@@ -19,8 +19,7 @@ function shuffleArray(array) {
 const App = React.createClass({
   getInitialState: function () {
     return {
-      cards: [],
-      userData: []
+      cards: []
     };
   },
 
