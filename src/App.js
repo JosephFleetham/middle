@@ -84,10 +84,8 @@ const CardList = React.createClass({
   },
   componentWillMount: function () {
     var numbers = [];
-    if (numbers.length !== localData.length) {
-      for (var i=0;i<localData.length;i++) {
-        numbers.push(i);
-      }
+    for (var i=0;i<localData.length;i++) {
+      numbers.push(i);
     }
     shuffleArray(numbers);
     this.setState({ index: numbers });
@@ -141,7 +139,7 @@ const Card = React.createClass({
     });
   },
 
-  handleUpVote: function () {
+  handleUpVote: function (emptyHeart) {
     var fullHeart = "http://i.imgur.com/rzmv6N6.png"
     var emptyHeart= "http://i.imgur.com/iPhyYk7.png"
     if (this.state.voted === false) {
