@@ -24,7 +24,7 @@ const App = React.createClass({
     };
   },
 
-  componentDidMount: function () {
+  componentWillMount: function () {
     this.setState({ cards: localData });
     var index = localData.length
     var that = this;
@@ -38,7 +38,6 @@ const App = React.createClass({
       return response.json();
     })
     .then(function(data) {
-      // is there a way to clean this up? One update function with a loop to account for more cards being added?
       that.setState({
         users: data.results
       });
@@ -49,10 +48,11 @@ const App = React.createClass({
     this.setState({
       cards:  update(this.state.cards, {
         [i]: {
+          photo: {$set: ("https://unsplash.it/500/200/?random=" + i)},
           author: {$set: this.state.users[i].name.first + " " + this.state.users[i].name.last},
           authorPhoto: {$set: this.state.users[i].picture.thumbnail},
           time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
-          comments: {$set: (Math.floor(Math.random() * 40))},
+          comments: {$set: (Math.floor(Math.random() * 40))}
         },
       })
     })
