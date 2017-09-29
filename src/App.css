@@ -167,3 +167,24 @@
 #topnav a.SignIn {
   color: LightGreen;
 }
+
+
+
+#newDropdown {
+  display: inline-block;
+  text-align: center;
+  font-family: 'Merriweather', serif;
+  position: relative;
+  width: 400px;
+  height: 375px;
+  border: 0px solid black;
+  box-shadow: 0 19px 38px rgba(0,0,0,.1), 0 15px 12px rgba(0,0,0,.12);
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 40px;
+}
+
+#newDropdown #title {
+  font-size: 30px;
+  font-weight: bold;
+}

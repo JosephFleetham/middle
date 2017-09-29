@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import localData from "./data.json"
 import update from 'react-addons-update';
+import $ from 'jquery';
 
 
 function shuffleArray(array) {
@@ -185,14 +186,56 @@ const Card = React.createClass({
   }
 });
 
-class TopNav extends Component {
+const TopNav = React.createClass({
+  getInitialState: function () {
+    return {
+      dropdownOpen: []
+    }
+  },
+  componentWillMount: function () {
+    this.setState({ dropdownOpen: false })
+  },
+  handleClick: function () {
+    if (this.state.dropdownOpen === false) {
+      $('.menu')
+      .slideDown();
+      this.setState({ dropdownOpen: true });
+    }
+    else {
+      $('.menu')
+      .slideUp();
+      this.setState({ dropdownOpen: false });
+    }
+  },
   render() {
     return (
       <div id="topnav">
         <div className="ui three column grid">
           <div className="column">
             <div id="new">
-              <a className="yellow item" href="#">Write a story...</a>
+              <div className="ui dropdown">
+                  <a className="yellow item" onClick={this.handleClick}>Write a story...</a>
+                  <div className="menu">
+                    <div id='newDropdown'>
+                      <form action="/action_page.php">
+                        <label for="fname" id="title">Title: </label>
+                        <br />
+                        <br />
+                        <input type="text" name="title" placeholder="Article title..."></input>
+                        <br />
+                        <br />
+                        <label for="lname" id="title">Content: </label>
+                        <br />
+                        <br />
+                        <textarea rows="4" cols="25" placeholder="Enter content here..."></textarea>
+                        <br />
+                        <br />
+                        <br />
+                        <button className="large ui primary button">Submit</button>
+                      </form>
+                    </div>
+                  </div>
+              </div>
             </div>
           </div>
             <div className="column">
@@ -215,6 +258,6 @@ class TopNav extends Component {
       </div>
     );
   }
-}
+});
 
 export default App;
