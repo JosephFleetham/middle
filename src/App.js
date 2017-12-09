@@ -58,12 +58,16 @@ const App = React.createClass({
       this.updateState(i, data);
     }
   },
+  handleSubmit: function (cards, newCards) {
+    this.setState(cards : newCards);
+    console.log("fuck");
+  },
   render() {
     return (
       <div className="filler">
         <div className="sixteen wide column">
           <TopNav
-
+            cards={this.state.cards}
           />
 
         </div>
@@ -192,11 +196,16 @@ const TopNav = React.createClass({
       dropdownOpen: [],
       title: '',
       description: '',
-      newCards: []
+      newCards: [],
+      cards : []
     }
   },
   componentWillMount: function () {
-    this.setState({ dropdownOpen: false })
+    const cards = this.props.cards;
+    this.setState({
+      dropdownOpen: false,
+      cards: cards
+    })
   },
   toggleForm: function () {
     if (this.state.dropdownOpen === false) {
@@ -225,7 +234,8 @@ const TopNav = React.createClass({
   onFormSubmit: function(evt) {
     const newCards = this.state.newCards;
     newCards.push(this.state.title, this.state.description);
-    console.log(this.state.newCards)
+    console.log(this.state.newCards);
+    console.log(this.state.cards);
     evt.preventDefault();
   },
   render() {
