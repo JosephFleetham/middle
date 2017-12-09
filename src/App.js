@@ -189,13 +189,16 @@ const Card = React.createClass({
 const TopNav = React.createClass({
   getInitialState: function () {
     return {
-      dropdownOpen: []
+      dropdownOpen: [],
+      title: '',
+      description: '',
+      newCards: []
     }
   },
   componentWillMount: function () {
     this.setState({ dropdownOpen: false })
   },
-  handleClick: function () {
+  toggleForm: function () {
     if (this.state.dropdownOpen === false) {
       $('.menu')
       .slideDown();
@@ -207,6 +210,24 @@ const TopNav = React.createClass({
       this.setState({ dropdownOpen: false });
     }
   },
+  updateTitleValue: function(evt) {
+    this.setState({
+      title: evt.target.value
+    });
+    console.log(this.state.title);
+  },
+  updateDescriptionValue: function(evt) {
+    this.setState({
+      description: evt.target.value
+    });
+    console.log(this.state.description);
+  },
+  onFormSubmit: function(evt) {
+    const newCards = this.state.newCards;
+    newCards.push(this.state.title, this.state.description);
+    console.log(this.state.newCards)
+    evt.preventDefault();
+  },
   render() {
     return (
       <div id="topnav">
@@ -214,24 +235,23 @@ const TopNav = React.createClass({
           <div className="column">
             <div id="new">
               <div className="ui dropdown">
-                  <a className="yellow item" onClick={this.handleClick}>Write a story...</a>
+                  <a className="yellow item" onClick={this.toggleForm}>Write a story...</a>
                   <div className="menu">
                     <div id='newDropdown'>
-                      <form action="/action_page.php">
-                        <label for="fname" id="title">Title: </label>
-                        <br />
-                        <br />
-                        <input type="text" name="title" placeholder="Article title..."></input>
-                        <br />
-                        <br />
-                        <label for="lname" id="title">Content: </label>
-                        <br />
-                        <br />
-                        <textarea rows="4" cols="25" placeholder="Enter content here..."></textarea>
-                        <br />
-                        <br />
-                        <br />
-                        <button className="large ui primary button">Submit</button>
+                      <form onSubmit={this.onFormSubmit}>
+                        <input
+                          placeholder='Article Title...'
+                          name='title'
+                          value={this.state.title}
+                          onChange={this.updateTitleValue}
+                        />
+                        <input
+                          placeholder='Enter content here...'
+                          name='description'
+                          value={this.state.description}
+                          onChange={this.updateDescriptionValue}
+                        />
+                        <input type='submit' />
                       </form>
                     </div>
                   </div>
