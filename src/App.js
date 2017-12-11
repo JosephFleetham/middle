@@ -194,17 +194,11 @@ const TopNav = React.createClass({
   getInitialState: function () {
     return {
       dropdownOpen: [],
-      title: '',
-      description: '',
-      newCards: [],
-      cards : []
     }
   },
   componentWillMount: function () {
-    const cards = this.props.cards;
     this.setState({
-      dropdownOpen: false,
-      cards: cards
+      dropdownOpen: false
     })
   },
   toggleForm: function () {
@@ -219,25 +213,6 @@ const TopNav = React.createClass({
       this.setState({ dropdownOpen: false });
     }
   },
-  updateTitleValue: function(evt) {
-    this.setState({
-      title: evt.target.value
-    });
-    console.log(this.state.title);
-  },
-  updateDescriptionValue: function(evt) {
-    this.setState({
-      description: evt.target.value
-    });
-    console.log(this.state.description);
-  },
-  onFormSubmit: function(evt) {
-    const newCards = this.state.newCards;
-    newCards.push(this.state.title, this.state.description);
-    console.log(this.state.newCards);
-    console.log(this.state.cards);
-    evt.preventDefault();
-  },
   render() {
     return (
       <div id="topnav">
@@ -247,23 +222,9 @@ const TopNav = React.createClass({
               <div className="ui dropdown">
                   <a className="yellow item" onClick={this.toggleForm}>Write a story...</a>
                   <div className="menu">
-                    <div id='newDropdown'>
-                      <form onSubmit={this.onFormSubmit}>
-                        <input
-                          placeholder='Article Title...'
-                          name='title'
-                          value={this.state.title}
-                          onChange={this.updateTitleValue}
-                        />
-                        <input
-                          placeholder='Enter content here...'
-                          name='description'
-                          value={this.state.description}
-                          onChange={this.updateDescriptionValue}
-                        />
-                        <input type='submit' />
-                      </form>
-                    </div>
+                    <NewCardForm
+                      onFormSubmit={this.handleSubmit}
+                    />
                   </div>
               </div>
             </div>
@@ -289,5 +250,62 @@ const TopNav = React.createClass({
     );
   }
 });
+
+const NewCardForm = React.createClass({
+  getInitialState: function () {
+    return {
+      title: '',
+      description: '',
+      newCards: [],
+      cards : []
+    }
+  },
+  componentWillMount: function () {
+    const cards = this.props.cards;
+    this.setState({
+      cards: cards
+    })
+  },
+  updateTitleValue: function(evt) {
+    this.setState({
+      title: evt.target.value
+    });
+    console.log(this.state.title);
+  },
+  updateDescriptionValue: function(evt) {
+    this.setState({
+      description: evt.target.value
+    });
+    console.log(this.state.description);
+  },
+  handleSubmit: function(evt) {
+    const newCards = this.state.newCards;
+    newCards.push(this.state.title, this.state.description);
+    console.log(this.state.newCards);
+    console.log(this.state.cards);
+    evt.preventDefault();
+},
+  render() {
+    return (
+      <div id='newDropdown'>
+        <input
+          placeholder='Article Title...'
+          name='title'
+          defaultValue={this.props.title}
+          onChange={this.updateTitleValue}
+        />
+        <input
+          placeholder='Enter content here...'
+          name='description'
+          defaultValue={this.props.description}
+          onChange={this.updateDescriptionValue}
+        />
+        <button className='ui basic blue button' onClick={this.handleSubmit}>
+          Submit
+        </button>
+      </div>
+    )
+  }
+})
 
 export default App;
