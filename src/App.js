@@ -25,6 +25,76 @@ const App = React.createClass({
   },
 
   componentWillMount: function () {
+    localStorage.clear();
+    localStorage.setItem('cards', JSON.stringify([
+      {
+        "id": "1",
+        "title": "Why You Shouldn’t Unlock Your Phone With Your Face",
+        "description": "Today Apple announced its new FaceID technology. It’s a new way to unlock your phone through facial recognition. All you have to do is…",
+        "photo": "",
+        "author": " ",
+        "authorPhoto": "photo",
+        "time": "Math.random() min 3 sec",
+        "votes": " ",
+        "comments": ""
+      },
+      {
+        "id": "2",
+        "title": "What Every Web Designer Should Know",
+        "description": "Want to build or improve a user experience? Start here.",
+        "photo": "",
+        "author": " ",
+        "authorPhoto": "photo",
+        "time": "2 min 3 sec",
+        "votes": " ",
+        "comments": ""
+      },
+      {
+        "id": "3",
+        "title": "Financing Suburbia",
+        "description": "How government mortgage policy determined where you live",
+        "photo": "",
+        "author": " ",
+        "authorPhoto": "photo",
+        "time": "2 min 3 sec",
+        "votes": " ",
+        "comments": ""
+      },
+      {
+        "id": "4",
+        "title": "AI: Scary for the Right Reasons",
+        "description": "Artificial intelligence, AI, has grabbed headlines, hype, and even consternation at the beast we are unleashing. Every powerful technology…",
+        "photo": "",
+        "author": " ",
+        "authorPhoto": "photo",
+        "time": "2 min 3 sec",
+        "votes": " ",
+        "comments": ""
+      },
+      {
+        "id": "5",
+        "title": "Closing in on Cancer",
+        "description": "Science will win the technical battle against cancer. But that is only half the fight.",
+        "photo": "",
+        "author": " ",
+        "authorPhoto": "photo",
+        "time": "2 min 3 sec",
+        "votes": " ",
+        "comments": ""
+      },
+      {
+        "id": "6",
+        "title": "Myths and Facts About Veganism",
+        "description": "More of us find the diet appealing — but is it healthy?",
+        "photo": "",
+        "author": " ",
+        "authorPhoto": "photo",
+        "time": "2 min 3 sec",
+        "votes": " ",
+        "comments": ""
+      }
+    ]))
+    console.log(JSON.parse(localStorage.getItem('cards')));
     this.setState({ cards: localData });
     var that = this;
     var url = "https://randomuser.me/api/?results=" + localData.length
@@ -251,61 +321,62 @@ const TopNav = React.createClass({
   }
 });
 
-const NewCardForm = React.createClass({
-  getInitialState: function () {
-    return {
-      title: '',
-      description: '',
-      newCards: [],
-      cards : []
-    }
+  const NewCardForm = React.createClass({
+    getInitialState: function () {
+      return {
+        title: '',
+        description: '',
+        newCards: [],
+        cards : []
+      }
+    },
+    componentWillMount: function () {
+      const cards = this.props.cards;
+      this.setState({
+        cards: cards
+      })
+    },
+    updateTitleValue: function(evt) {
+      this.setState({
+        title: evt.target.value
+      });
+      console.log(this.state.title);
+    },
+    updateDescriptionValue: function(evt) {
+      this.setState({
+        description: evt.target.value
+      });
+      console.log(this.state.description);
+    },
+    handleSubmit: function(evt) {
+      const newCards = this.state.newCards;
+      newCards.push(this.state.title, this.state.description);
+      console.log(this.state.newCards);
+      console.log(this.state.cards);
+      evt.preventDefault();
   },
-  componentWillMount: function () {
-    const cards = this.props.cards;
-    this.setState({
-      cards: cards
-    })
-  },
-  updateTitleValue: function(evt) {
-    this.setState({
-      title: evt.target.value
-    });
-    console.log(this.state.title);
-  },
-  updateDescriptionValue: function(evt) {
-    this.setState({
-      description: evt.target.value
-    });
-    console.log(this.state.description);
-  },
-  handleSubmit: function(evt) {
-    const newCards = this.state.newCards;
-    newCards.push(this.state.title, this.state.description);
-    console.log(this.state.newCards);
-    console.log(this.state.cards);
-    evt.preventDefault();
-},
   render() {
     return (
       <div id='newDropdown'>
-        <input
-          placeholder='Article Title...'
-          name='title'
-          defaultValue={this.props.title}
-          onChange={this.updateTitleValue}
-        />
-        <input
-          placeholder='Enter content here...'
-          name='description'
-          defaultValue={this.props.description}
-          onChange={this.updateDescriptionValue}
-        />
-        <button className='ui basic blue button' onClick={this.handleSubmit}>
-          Submit
-        </button>
+        <form action="/action_page.php">
+          <label for="fname" id="title">Title: </label>
+          <br />
+          <br />
+          <input type="text" name="title" placeholder="Article title..."></input>
+          <br />
+          <br />
+          <label for="lname" id="title">Content: </label>
+          <br />
+          <br />
+          <textarea rows="4" cols="25" placeholder="Enter content here..."></textarea>
+          <br />
+          <br />
+          <br />
+          <button className="large ui primary button" onClick={this.handleSubmit}>Submit</button>
+        </form>
       </div>
     )
   }
-})
+});
 
 export default App;
