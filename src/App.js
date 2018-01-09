@@ -26,111 +26,41 @@ const App = React.createClass({
 
   componentWillMount: function () {
     localStorage.clear();
-    localStorage.setItem('cards', JSON.stringify([
-      {
-        "id": "1",
-        "title": "Why You Shouldn’t Unlock Your Phone With Your Face",
-        "description": "Today Apple announced its new FaceID technology. It’s a new way to unlock your phone through facial recognition. All you have to do is…",
-        "photo": "",
-        "author": " ",
-        "authorPhoto": "photo",
-        "time": "Math.random() min 3 sec",
-        "votes": " ",
-        "comments": ""
-      },
-      {
-        "id": "2",
-        "title": "What Every Web Designer Should Know",
-        "description": "Want to build or improve a user experience? Start here.",
-        "photo": "",
-        "author": " ",
-        "authorPhoto": "photo",
-        "time": "2 min 3 sec",
-        "votes": " ",
-        "comments": ""
-      },
-      {
-        "id": "3",
-        "title": "Financing Suburbia",
-        "description": "How government mortgage policy determined where you live",
-        "photo": "",
-        "author": " ",
-        "authorPhoto": "photo",
-        "time": "2 min 3 sec",
-        "votes": " ",
-        "comments": ""
-      },
-      {
-        "id": "4",
-        "title": "AI: Scary for the Right Reasons",
-        "description": "Artificial intelligence, AI, has grabbed headlines, hype, and even consternation at the beast we are unleashing. Every powerful technology…",
-        "photo": "",
-        "author": " ",
-        "authorPhoto": "photo",
-        "time": "2 min 3 sec",
-        "votes": " ",
-        "comments": ""
-      },
-      {
-        "id": "5",
-        "title": "Closing in on Cancer",
-        "description": "Science will win the technical battle against cancer. But that is only half the fight.",
-        "photo": "",
-        "author": " ",
-        "authorPhoto": "photo",
-        "time": "2 min 3 sec",
-        "votes": " ",
-        "comments": ""
-      },
-      {
-        "id": "6",
-        "title": "Myths and Facts About Veganism",
-        "description": "More of us find the diet appealing — but is it healthy?",
-        "photo": "",
-        "author": " ",
-        "authorPhoto": "photo",
-        "time": "2 min 3 sec",
-        "votes": " ",
-        "comments": ""
-      }
-    ]))
-    console.log(JSON.parse(localStorage.getItem('cards')));
-    this.setState({ cards: localData });
+    localStorage.setItem('cards', JSON.stringify([localData]))
+    this.setState({ cards: JSON.parse(localStorage.getItem('cards'))});
     var that = this;
     var url = "https://randomuser.me/api/?results=" + localData.length
 
     fetch(url)
-    .then(function(response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    })
+    .then(function(response){ return response.json(); })
     .then(function(data) {
-      that.loopApiData(data);
-    });
+        const items = data;
+        that.loopApiData(items);
+    })
   },
-  updateState: function (i, data) {
+  updateState: function (i, items) {
+    this.setState({ cards: this.state.cards[0]});
     this.setState({
       cards:  update(this.state.cards, {
         [i]: {
           photo: {$set: ("https://unsplash.it/500/200/?random=" + i)},
-          author: {$set: data.results[i].name.first + " " + data.results[i].name.last},
-          authorPhoto: {$set: data.results[i].picture.thumbnail},
+          author: {$set: items.results[i].name.first + " " + items.results[i].name.last},
+          authorPhoto: {$set: items.results[i].picture.thumbnail},
           time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
           comments: {$set: (Math.floor(Math.random() * 40))}
         },
       })
     })
   },
-  loopApiData: function (data) {
-    for (var i=0; i<localData.length;i++) {
-      this.updateState(i, data);
+  loopApiData: function (items) {
+    var data = localStorage.getItem("cards");
+    var cardStorage = JSON.parse(data);
+    for (var i=0; i<localStorage.length;i++) { // when tryign to change this to cardStorage[0].length, it creates an error with card update on line 41
+      this.updateState(i, items);
     }
   },
   handleSubmit: function (cards, newCards) {
     this.setState(cards : newCards);
-    console.log("fuck");
   },
   render() {
     return (
@@ -154,19 +84,24 @@ const CardList = React.createClass({
 
   getInitialState: function () {
     return {
-      index: []
+      index: [],
+      cards: []
     }
   },
   componentWillMount: function () {
+    this.setState({ cards: this.props.cards[0]});
+    var data = localStorage.getItem("cards");
+    var cardStorage = JSON.parse(data);
+    console.log(cardStorage[0].length)
     var numbers = [];
-    for (var i=0;i<localData.length;i++) {
+    for (var i=0;i<cardStorage[0].length;i++) {
       numbers.push(i);
     }
     shuffleArray(numbers);
     this.setState({ index: numbers });
   },
   render: function () {
-    const cards = this.props.cards.map((card) => (
+    const cards = this.state.cards.map((card) => ( // changed this.props.cards to this.state.cards after seting state to this.props.cards[0] on line 92, no API data pulled now however
       <Card
         id={card.id}
         title={card.title}
