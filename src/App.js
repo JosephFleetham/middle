@@ -17,10 +17,10 @@ function shuffleArray(array) {
   return array;
 }
 
-const App = React.createClass({
+var App = React.createClass({
   getInitialState: function () {
     return {
-      cards: [],
+      cards: []
     };
   },
 
@@ -69,6 +69,7 @@ const App = React.createClass({
         <div className="sixteen wide column">
           <TopNav
             cards={this.state.cards}
+            app={this}
           />
 
         </div>
@@ -225,6 +226,8 @@ const TopNav = React.createClass({
                   <div className="menu">
                     <NewCardForm
                       onFormSubmit={this.handleSubmit}
+                      cards={this.props.cards}
+                      app={this.props.app}
                     />
                   </div>
               </div>
@@ -255,17 +258,11 @@ const TopNav = React.createClass({
   const NewCardForm = React.createClass({
     getInitialState: function () {
       return {
-        title: '',
-        description: '',
-        newCards: [],
-        cards : []
+        newCards: []
       }
     },
     componentWillMount: function () {
-      const cards = this.props.cards;
-      this.setState({
-        cards: cards
-      })
+
     },
     updateTitleValue: function(evt) {
       this.setState({
@@ -281,33 +278,53 @@ const TopNav = React.createClass({
     },
     handleSubmit: function(evt) {
       const newCards = this.state.newCards;
-      newCards.push(this.state.title, this.state.description);
-      console.log(this.state.newCards);
-      console.log(this.state.cards);
-      evt.preventDefault();
+      newCards.push(
+        {
+          "id": (JSON.parse(localStorage.getItem("cards")).length + 1).toString(),
+          "title": this.state.title,
+          "description": this.state.description,
+          "photo": "",
+          "author": "",
+          "authorPhoto": "",
+          "time": "",
+          "votes": "",
+          "comments": ""
+        },
+      );
+      var arr = JSON.parse(localStorage.getItem("cards")) || [];
+      arr.push(
+        this.state.newCards[0]
+      );
+      localStorage.setItem('cards', JSON.stringify(arr))
+      // localStorage.setItem("cards", JSON.stringify(arr));
+      console.log(JSON.parse(localStorage.getItem('cards')))
+      console.log(this.props);
+      console.log(this.props.app);
+      this.props.app.updateState({ cards: arr });
+      // console.log(this.state.newCards);
+      // console.log(this.props.cards);
   },
   render() {
-    return (
-      <div id='newDropdown'>
-        <form action="/action_page.php">
-          <label for="fname" id="title">Title: </label>
-          <br />
-          <br />
-          <input type="text" name="title" placeholder="Article title..."></input>
-          <br />
-          <br />
-          <label for="lname" id="title">Content: </label>
-          <br />
-          <br />
-          <textarea rows="4" cols="25" placeholder="Enter content here..."></textarea>
-          <br />
-          <br />
-          <br />
-          <button className="large ui primary button" onClick={this.handleSubmit}>Submit</button>
-        </form>
-      </div>
-    )
-  }
+      return (
+        <div id='newDropdown'>
+          <input
+            placeholder='Article Title...'
+            name='title'
+            defaultValue={this.props.title}
+            onChange={this.updateTitleValue}
+          />
+          <input
+            placeholder='Enter content here...'
+            name='description'
+            defaultValue={this.props.description}
+            onChange={this.updateDescriptionValue}
+          />
+          <button className='ui basic blue button' onClick={this.handleSubmit}>
+            Submit
+          </button>
+        </div>
+      )
+    }
 });
 
 export default App;
