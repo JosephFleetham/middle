@@ -20,43 +20,44 @@ function shuffleArray(array) {
 const App = React.createClass({
   getInitialState: function () {
     return {
-      cards: []
+      cards: [],
     };
   },
 
   componentWillMount: function () {
-    localStorage.clear();
-    localStorage.setItem('cards', JSON.stringify([localData]))
+    // localStorage.clear();
+    localStorage.setItem('cards', JSON.stringify(localData))
     this.setState({ cards: JSON.parse(localStorage.getItem('cards'))});
     var that = this;
-    var url = "https://randomuser.me/api/?results=" + localData.length
+    var url = "https://randomuser.me/api/?results=" + JSON.parse(localStorage.getItem('cards')).length
 
     fetch(url)
-    .then(function(response){ return response.json(); })
-    .then(function(data) {
-        const items = data;
-        that.loopApiData(items);
+    .then(function(response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
     })
+    .then(function(data) {
+      that.loopApiData(data);
+    });
   },
-  updateState: function (i, items) {
-    this.setState({ cards: this.state.cards[0]});
+  updateState: function (i, data) {
     this.setState({
       cards:  update(this.state.cards, {
         [i]: {
           photo: {$set: ("https://unsplash.it/500/200/?random=" + i)},
-          author: {$set: items.results[i].name.first + " " + items.results[i].name.last},
-          authorPhoto: {$set: items.results[i].picture.thumbnail},
+          author: {$set: data.results[i].name.first + " " + data.results[i].name.last},
+          authorPhoto: {$set: data.results[i].picture.thumbnail},
           time: {$set: ((Math.floor(Math.random() * 15) + 1)) + " min " + ((Math.floor(Math.random() * 58) + 1)) + " sec"},
           comments: {$set: (Math.floor(Math.random() * 40))}
         },
       })
     })
   },
-  loopApiData: function (items) {
-    var data = localStorage.getItem("cards");
-    var cardStorage = JSON.parse(data);
-    for (var i=0; i<localStorage.length;i++) { // when tryign to change this to cardStorage[0].length, it creates an error with card update on line 41
-      this.updateState(i, items);
+  loopApiData: function (data) {
+    for (var i=0; i<this.state.cards.length;i++) {
+      this.updateState(i, data);
     }
   },
   handleSubmit: function (cards, newCards) {
@@ -84,24 +85,19 @@ const CardList = React.createClass({
 
   getInitialState: function () {
     return {
-      index: [],
-      cards: []
+      index: []
     }
   },
   componentWillMount: function () {
-    this.setState({ cards: this.props.cards[0]});
-    var data = localStorage.getItem("cards");
-    var cardStorage = JSON.parse(data);
-    console.log(cardStorage[0].length)
     var numbers = [];
-    for (var i=0;i<cardStorage[0].length;i++) {
+    for (var i=0;i<this.props.cards.length;i++) {
       numbers.push(i);
     }
     shuffleArray(numbers);
     this.setState({ index: numbers });
   },
   render: function () {
-    const cards = this.state.cards.map((card) => ( // changed this.props.cards to this.state.cards after seting state to this.props.cards[0] on line 92, no API data pulled now however
+    const cards = this.props.cards.map((card) => (
       <Card
         id={card.id}
         title={card.title}
