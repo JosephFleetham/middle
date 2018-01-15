@@ -25,9 +25,14 @@ var App = React.createClass({
   },
 
   componentWillMount: function () {
-    // localStorage.clear();
-    localStorage.setItem('cards', JSON.stringify(localData))
-    this.setState({ cards: JSON.parse(localStorage.getItem('cards'))});
+    console.log(this.props.app);
+    if (JSON.parse(localStorage.getItem('cards')) === null || JSON.parse(localStorage.getItem('cards')).length === localData.length ) {
+      localStorage.setItem('cards', JSON.stringify(localData))
+      this.setState({ cards: JSON.parse(localStorage.getItem('cards'))});
+    }
+    else {
+      this.setState({ cards: JSON.parse(localStorage.getItem('cards'))});
+    }
     var that = this;
     var url = "https://randomuser.me/api/?results=" + JSON.parse(localStorage.getItem('cards')).length
 
@@ -76,6 +81,7 @@ var App = React.createClass({
         <br />
           <CardList
             cards={this.state.cards}
+            app={this}
           />
       </div>
     );
@@ -296,13 +302,10 @@ const TopNav = React.createClass({
         this.state.newCards[0]
       );
       localStorage.setItem('cards', JSON.stringify(arr))
-      // localStorage.setItem("cards", JSON.stringify(arr));
       console.log(JSON.parse(localStorage.getItem('cards')))
-      console.log(this.props);
-      console.log(this.props.app);
-      this.props.app.updateState({ cards: arr });
-      // console.log(this.state.newCards);
-      // console.log(this.props.cards);
+
+      this.props.app.setState({ cards: JSON.parse(localStorage.getItem('cards')) }); // is this doing anything right now?
+      console.log(this.props.app.state);
   },
   render() {
       return (
