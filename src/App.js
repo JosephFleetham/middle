@@ -25,7 +25,7 @@ var App = React.createClass({
   },
 
   componentWillMount: function () {
-    console.log(this.props.app);
+    console.log(this);
     if (JSON.parse(localStorage.getItem('cards')) === null || JSON.parse(localStorage.getItem('cards')).length === localData.length ) {
       localStorage.setItem('cards', JSON.stringify(localData))
       this.setState({ cards: JSON.parse(localStorage.getItem('cards'))});
@@ -303,31 +303,47 @@ const TopNav = React.createClass({
       );
       localStorage.setItem('cards', JSON.stringify(arr))
       console.log(JSON.parse(localStorage.getItem('cards')))
-
       this.props.app.setState({ cards: JSON.parse(localStorage.getItem('cards')) }); // is this doing anything right now?
-      console.log(this.props.app.state);
+      window.location.reload();
   },
   render() {
       return (
         <div id='newDropdown'>
-          <input
-            placeholder='Article Title...'
-            name='title'
-            defaultValue={this.props.title}
-            onChange={this.updateTitleValue}
-          />
-          <input
-            placeholder='Enter content here...'
-            name='description'
-            defaultValue={this.props.description}
-            onChange={this.updateDescriptionValue}
-          />
-          <button className='ui basic blue button' onClick={this.handleSubmit}>
-            Submit
-          </button>
+          <form action="/action_page.php">
+            <label for="fname" id="title">Title: </label>
+            <br />
+            <br />
+            <input
+              type="text"
+              name="title"
+              placeholder="Card title..."
+              defaultValue={this.props.title}
+              onChange={this.updateTitleValue}
+            />
+            <br />
+            <br />
+            <label for="lname" id="title">Description: </label>
+            <br />
+            <br />
+            <textarea
+              name='description'
+              defaultValue={this.props.description}
+              onChange={this.updateDescriptionValue}
+              rows="4"
+              cols="25"
+              placeholder="Enter description here..."
+            />
+            <br />
+            <br />
+            <br />
+            <button className='ui large blue button' onClick={this.handleSubmit}>
+              Submit
+            </button>
+          </form>
         </div>
       )
     }
+
 });
 
 export default App;
